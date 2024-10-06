@@ -38,7 +38,7 @@ The project empowers users to make informed decisions, reduce their carbon footp
 ### Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Freya-Ng/Climate-Story-Telling.git
+   git clone https://github.com/NguyenHuy190303/WakeUp.git
    ```
 2. Install dependencies:
    ```sh
