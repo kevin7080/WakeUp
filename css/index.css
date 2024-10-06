@@ -6,10 +6,12 @@
 }
 
 body {
-    color: white;
+    color: #f0f0f0; /* Màu chữ trắng nhạt */
+    background-color: #121212; /* Màu nền xám đen */
     min-height: 100svh;
     overflow: hidden;
 }
+
 
 .video-container {
     position: fixed;
@@ -63,6 +65,53 @@ body {
     background: white;
 }
 
+/* Chung style cho cả hai nút Explore Chart và Explore Map */
+.explore-btn {
+    position: absolute;
+    top: 20px;
+    padding: 10px 20px;
+    background-color: #333; /* Màu xám đậm gần với đen */
+    color: #fff; /* Màu chữ trắng */
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.explore-btn:hover {
+    background-color: #000; /* Màu đen khi hover */
+    color: #e0e0e0; /* Màu chữ chuyển thành xám nhạt khi hover */
+}
+
+/* Đặt các nút vị trí khác nhau */
+.explore-btn {
+    right: 20px;
+}
+
+.map-btn {
+    right: 160px; /* Điều chỉnh để nút này cách nút Explore Chart 1 khoảng phù hợp */
+}
+
+
+.explore-more-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #333; /* Màu xám đậm gần với đen */
+    color: #fff; /* Màu chữ trắng */
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.explore-more-btn:hover {
+    background-color: #000; /* Màu đen khi hover */
+    color: #e0e0e0; /* Màu chữ chuyển thành xám nhạt khi hover */
+}
+
+
 /* Rest of the existing styles */
 .container {
     padding: 7.5rem;
@@ -101,7 +150,7 @@ header {
     gap: 0.5rem;
     font-size: 1.5rem;
     text-decoration: none;
-    color: #FFF;
+    color: #FFF; /* Luôn màu trắng */
 }
 
 .logo-icon {
@@ -116,9 +165,9 @@ header {
 
 .language-selector {
     font-family: "Roboto Mono", sans-serif;
-    background: transparent;
-    border: 0px solid rgba(255, 255, 255, 0);
-    color: white;
+    background-color: #1e1e1e; /* Màu nền đậm hơn */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Đường viền màu trắng mờ */
+    color: #f8f8f8; /* Màu chữ trắng */
     padding: 0.5rem;
     border-radius: 4px;
 }
@@ -170,7 +219,8 @@ main {
     gap: 1rem;
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow-x : hidden;
+    overflow-y : auto;
     /*
     -webkit-mask-image: linear-gradient(black, black, black, transparent);
     mask-image: linear-gradient(black, black, black, transparent);
@@ -265,4 +315,163 @@ input::placeholder {
     top: 0;
     bottom: 0;
     vertical-align: middle;
+}
+/* Chat Icon Style */
+.chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333; /* Màu xám đậm cho nền nếu hình ảnh không tải */
+    border-radius: 50%; /* Làm biểu tượng tròn */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+    overflow: hidden; /* Giữ hình ảnh bên trong vòng tròn */
+}
+
+.chat-icon img {
+    width: 60%; /* Điều chỉnh kích thước hình ảnh phù hợp */
+    height: 60%;
+    object-fit: contain; /* Đảm bảo hình ảnh không bị méo */
+}
+
+.chat-icon:hover {
+    background-color: #555; /* Màu nền nhạt hơn khi hover */
+}
+
+/* Chat Popup Style */
+.chat-popup {
+    display: none; /* Ẩn hộp chat ban đầu */
+    position: fixed;
+    bottom: 90px; /* Đặt phía trên icon chat */
+    right: 20px;
+    width: 350px; /* Chiều rộng hộp chat */
+    height: 500px; /* Chiều cao hộp chat */
+    background-color: #fff; /* Màu nền trắng */
+    border-radius: 15px; /* Bo góc */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Giữ nội dung bên trong bo góc */
+    font-family: Arial, sans-serif; /* Font chữ sạch sẽ */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+}
+
+.chat-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* Chat Header Style */
+.chat-header {
+    background-color: #444; /* Màu xám đậm cho header */
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.chat-header .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Chat Body Style */
+.chat-body {
+    padding: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #f9f9f9; /* Nền xám nhạt */
+}
+
+/* Chat Footer Style */
+.chat-footer {
+    padding: 10px 15px;
+    background-color: #fff; /* Nền trắng cho footer */
+    border-top: 1px solid #ccc; /* Đường viền trên để tách biệt với body */
+}
+
+.chat-footer form {
+    display: flex;
+}
+
+.chat-footer input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+.chat-footer button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #444; /* Màu xám đậm cho nút */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-footer button:hover {
+    background-color: #555; /* Màu nhạt hơn khi hover */
+}
+
+/* Messages Styles */
+.user-message, .bot-message {
+    padding: 10px 15px;
+    margin: 8px 0;
+    border-radius: 20px;
+    max-width: 75%;
+    word-wrap: break-word;
+    clear: both;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: #0084FF; /* Màu xanh cho tin nhắn người dùng */
+    color: white;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #e0e0e0; /* Màu xám nhạt cho tin nhắn bot */
+    color: #000;
+}
+
+/* Error Message */
+.error-message {
+    text-align: center;
+    color: #e74c3c; /* Màu đỏ cho thông báo lỗi */
+    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chat-popup {
+        width: 90%;
+        height: 80%;
+        right: 5%;
+        bottom: 90px;
+    }
 }

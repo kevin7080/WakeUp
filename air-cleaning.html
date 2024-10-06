@@ -10,8 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/index.css">
-    <script src="scripts/index.js"></script>
-    <script src="scripts/location.js"></script>
+    <!-- Đặt các script ở cuối body để tải nhanh hơn -->
 </head>
 <body>
     <div class="video-container">
@@ -101,14 +100,49 @@
                 </div>
 
                 <div class="search-container">
-                        <label class="input-label">
-                            <input type="text" class="search-input" placeholder="WHAT ARE YOU MOST INTERESTED IN?">
-                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="#000000" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,109.66-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,173.66,133.66Z"></path></svg>
-                        </label>
-                    </div>
+                    <label class="input-label">
+                        <input type="text" class="search-input" placeholder="WHAT ARE YOU MOST INTERESTED IN?">
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="#000000" viewBox="0 0 256 256">
+                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,109.66-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,173.66,133.66Z"></path>
+                        </svg>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Chat Icon -->
+            <div class="chat-icon" id="chatIcon">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4EyzJvoJLgKEt_YCCds2jz60eZZW8fJKdA&s" alt="Chat Icon">
+            </div>
+
+            <!-- Chat Popup -->
+            <div class="chat-popup" id="chatPopup">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <h2>Chat with us</h2>
+                    <span class="close-btn" id="closeBtn">&times;</span>
+                </div>
+                
+                <!-- Chat Body -->
+                <div class="chat-body" id="chatBody">
+                    <!-- Initial message from bot -->
+                    <div class="bot-message">Hi! How can I help you today?</div>
+                </div>
+                
+                <!-- Chat Footer -->
+                <div class="chat-footer">
+                    <form id="chatForm">
+                        <input type="text" id="chatInput" placeholder="Type your message here..." autocomplete="off">
+                        <button type="submit" id="sendBtn">Send</button>
+                    </form>
+                </div>
             </div>
         </main>
     </div>
-</body>
 
+    <!-- Scripts được đặt ở cuối body để tải nhanh hơn -->
+    <script src="scripts/index.js"></script>
+    <script src="scripts/chat.js"></script>
+    <script src="scripts/location.js"></script>
+    <script src="scripts/test.js"></script>
+</body>
 </html>
