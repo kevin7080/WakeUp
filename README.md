@@ -1,6 +1,6 @@
 # ClimateAware
 
-**Team Website:** [Team WakeUp Website](https://github.com/NguyenHuy190303/NASA/blob/main/photo_2024-10-06_19-12-32.jpg)
+![Team Website](https://github.com/NguyenHuy190303/NASA/blob/main/photo_2024-10-06_19-12-32.jpg)
 
 ## About the Project
 
