@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Aware</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="scripts/index.js"></script>
+    <script src="scripts/location.js"></script>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Cycle between three videos as the video background -->
+        <video class="video-background active" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/4318100/4318100-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
+        <video class="video-background" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/28651202/12443641_2560_1440_24fps.mp4" type="video/mp4">
+        </video>
+        <video class="video-background" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/28769243/12472913_2560_1440_25fps.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="video-controls">
+        <div class="video-dot active"></div>
+        <div class="video-dot"></div>
+        <div class="video-dot"></div>
+    </div>
+
+    <!-- Rest of the existing content -->
+    <div class="container">
+        <div class="header-container">
+            <header>
+                <a class="logo" href="index.html">
+                    <img src="assets/images/icon.svg" alt="ClimateAware">
+                    ClimateAware
+                </a>
+
+                <a href="https://climate-story.streamlit.app/" class="explore-more-btn" target="_blank">Explore by chart</a>
+                <a href="https://earth.gov/ghgcenter/exploration?search=&datasets=%5B%5D&taxonomy=%7B%7D&date=&dateRange=" class="explore-btn map-btn" target="_blank">Explore by map</a>
+
+                <select class="language-selector">
+                    <option value="ENGLISH">EN</option>
+                    <option value="FINNISH">FI</option>
+                </select>
+            </header>
+
+            <div class="footer">
+                <p id="location" class="location"></p>
+                <h2 id="weather" class="weather">Fetching weather data...</h2>
+            </div>
+        </div>
+
+        <main>
+            <div class="content">
+                <div class="learn-more-container">
+                    <div class="cards">
+                        <div class="learn-more-heading">
+                            <h1>The Oceans Are Trying to Help, But They Need Our Help Too</h1>
+                        </div>
+                    </div>
+
+                    <div class="featured">
+                        <img class="featured-image" src="https://images.pexels.com/photos/847393/pexels-photo-847393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" srcset="">
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>What’s happening?</p>
+                            <h2>Oceans absorb a large amount of CO₂, helping to cool the planet. However, as the oceans warm and become more acidic due to pollution, their ability to absorb CO₂ decreases, which can accelerate climate change.</h2>
+                        </div>
+                    </div>
+
+                    <div class="image-cards">
+                        <img src="assets/images/ocean-help2.png" alt="" srcset="">
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>How can we solve that as a group?</p>
+                            <h2>Governments and industries must work together to reduce ocean pollution and prevent further warming. Supporting global policies that protect marine ecosystems and reducing plastic waste can help preserve ocean health.</h2>
+                        </div>
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>How can I solve that as an individual?</p>
+                            <h2>You can help by reducing plastic use, conserving water, and supporting sustainable fishing practices. Additionally, voting for leaders who advocate for ocean protection and pollution reduction can drive change on a larger scale.</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-container">
+                        <label class="input-label">
+                            <input type="text" class="search-input" placeholder="WHAT ARE YOU MOST INTERESTED IN?">
+                            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="#000000" viewBox="0 0 256 256"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,109.66-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,173.66,133.66Z"></path></svg>
+                        </label>
+                    </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
