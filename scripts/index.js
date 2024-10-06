@@ -1,318 +1,163 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Instrument Serif", sans-serif;
-}
+document.addEventListener('DOMContentLoaded', function () {
+    const videos = document.querySelectorAll('.video-background');
+    const dots = document.querySelectorAll('.video-dot');
+    let currentVideoIndex = 0;
+    const videoCount = videos.length;
+    let intervalId;
 
-body {
-    color: #f0f0f0; /* Màu chữ trắng nhạt */
-    background-color: #121212; /* Màu nền xám đen */
-    min-height: 100svh;
-    overflow: hidden;
-}
+    // Function to switch videos
+    function switchVideo(index) {
+        videos.forEach(video => video.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
 
+        videos[index].classList.add('active');
+        dots[index].classList.add('active');
 
-.video-container {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -1;
-}
+        videos[index].play();
+    }
 
-.video-background {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    filter: brightness(0.4);
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
+    function nextVideo() {
+        currentVideoIndex = (currentVideoIndex + 1) % videoCount;
+        switchVideo(currentVideoIndex);
+    }
 
-.video-background.active {
-    opacity: 1;
-}
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentVideoIndex = index;
+            switchVideo(currentVideoIndex);
+            clearInterval(intervalId);
+            intervalId = setInterval(nextVideo, 8000);
+        });
+    });
 
-/* Video controls */
-.video-controls {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 100;
-    display: flex;
-    gap: 8px;
-}
+    intervalId = setInterval(nextVideo, 8000);
 
-.video-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-    transition: ease-out 0.3s;
-}
+    // Search functionality
+    const searchInput = document.querySelector('.search-input');
+    const searchIcon = document.querySelector('.input-icon');
 
-.video-dot.active {
-    background: white;
-}
+    // Add event listener for pressing Enter key in search input
+    searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const userQuestion = this.value.trim();
+            if (userQuestion) {
+                performGoogleSearch(userQuestion);
+            }
+        }
+    });
 
-/* Chung style cho cả hai nút Explore Chart và Explore Map */
-.explore-btn {
-    position: absolute;
-    top: 20px;
-    padding: 10px 20px;
-    background-color: #333; /* Màu xám đậm gần với đen */
-    color: #fff; /* Màu chữ trắng */
-    font-size: 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
+    // Add event listener for clicking the search icon
+    searchIcon.addEventListener('click', () => {
+        const userQuestion = searchInput.value.trim();
+        if (userQuestion) {
+            performGoogleSearch(userQuestion);
+        }
+    });
 
-.explore-btn:hover {
-    background-color: #000; /* Màu đen khi hover */
-    color: #e0e0e0; /* Màu chữ chuyển thành xám nhạt khi hover */
-}
+    // Function to perform Google search
+    function performGoogleSearch(query) {
+        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+        window.open(googleSearchUrl, '_blank');
+    }
 
-/* Đặt các nút vị trí khác nhau */
-.explore-btn {
-    right: 20px;
-}
+    // Step 1: Get user's location
+    function getUserLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            document.getElementById('weather').textContent = "Geolocation is not supported by this browser.";
+        }
+    }
 
-.map-btn {
-    right: 160px; /* Điều chỉnh để nút này cách nút Explore Chart 1 khoảng phù hợp */
-}
+    // Step 2: Success callback for geolocation
+    function successCallback(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetchWeatherData(lat, lon);
+    }
 
+    // Step 3: Error callback for geolocation
+    function errorCallback(error) {
+        document.getElementById('weather').textContent = `Error fetching location: ${error.message}`;
+    }
 
-.explore-more-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #333; /* Màu xám đậm gần với đen */
-    color: #fff; /* Màu chữ trắng */
-    font-size: 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
+    // Step 4: Fetch weather data using your proxy
+    function fetchWeatherData(lat, lon) {
+        const proxyUrl = `http://localhost:3000/weather?lat=${lat}&lon=${lon}`;
+        fetch(proxyUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const temp = data.data[0].coordinates[0].dates[0].value;
+                document.getElementById('weather').textContent = `Current Temperature: ${temp}°C`;
+            })
+            .catch(error => {
+                document.getElementById('weather').textContent = `Error fetching weather data: ${error.message}`;
+            });
+    }
 
-.explore-more-btn:hover {
-    background-color: #000; /* Màu đen khi hover */
-    color: #e0e0e0; /* Màu chữ chuyển thành xám nhạt khi hover */
-}
+    window.onload = getUserLocation;
 
+    async function fetchExperiments() {
+        const response = await fetch('/experiments');
+        const data = await response.json();
+        const experimentsSelect = document.getElementById('experiments');
+        data.experiments.forEach(experiment => {
+            const option = document.createElement('option');
+            option.value = experiment;
+            option.textContent = experiment;
+            experimentsSelect.appendChild(option);
+        });
+    }
 
-/* Rest of the existing styles */
-.container {
-    padding: 7.5rem;
-    display: flex;
-    flex-direction: row;
-    gap: 2.5rem;
-    justify-content: space-between;
-    width: 100%;
-    height: 100svh;
-}
+    async function fetchCountryData(experiment, countryCode) {
+        const response = await fetch(`/country_data?experiment=${experiment}&country_code=${countryCode}`);
+        const data = await response.json();
+        const countryDataDiv = document.getElementById('countryData');
+        if (data.error) {
+            alert(data.error);
+        } else {
+            countryDataDiv.textContent = JSON.stringify(data.country_data, null, 2);
+            return data.country_data;
+        }
+    }
 
-.header-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    max-width: 320px;
-}
+    const languageSelector = document.querySelector('.language-selector');
+    let currentLanguage = 'en';
 
-.footer {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-}
+    languageSelector.addEventListener('change', (event) => {
+        currentLanguage = event.target.value;
+        updateLanguage();
+    });
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    function updateLanguage() {
+        const textElements = document.querySelectorAll('[data-text-key]');
+        textElements.forEach(element => {
+            const key = element.getAttribute('data-text-key');
+            element.textContent = text[currentLanguage][key];
+        });
+    }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #FFF; /* Luôn màu trắng */
-}
+    updateLanguage();
 
-.logo-icon {
-    width: 32px;
-    height: 32px;
-    background: #ff9800;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.language-selector {
-    font-family: "Roboto Mono", sans-serif;
-    background-color: #1e1e1e; /* Màu nền đậm hơn */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Đường viền màu trắng mờ */
-    color: #f8f8f8; /* Màu chữ trắng */
-    padding: 0.5rem;
-    border-radius: 4px;
-}
-
-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    max-width: 640px;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    width: 100%;
-    max-width: 640px;
-    height: 100%;
-}
-
-.cards {
-    text-decoration: none;
-    color: white;
-}
-
-.learn-more {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2.5rem;
-    background-color: rgba(17, 17, 17, 0.16);
-    backdrop-filter: blur(40px);
-    border-radius: 2rem;
-}
-
-.learn-more-heading {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2.5rem;
-    background-color: rgba(17, 17, 17, 0.80);
-    backdrop-filter: blur(40px);
-    border-radius: 2rem;
-}
-
-.learn-more-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    height: 100%;
-    overflow-x : hidden;
-    overflow-y : auto;
-    /*
-    -webkit-mask-image: linear-gradient(black, black, black, transparent);
-    mask-image: linear-gradient(black, black, black, transparent);
-    */
-}
-
-.image-cards {
-    padding: 2.5rem;
-    height: auto;
-    border-radius: 2rem;
-    background: #FFF;
-}
-
-img {
-    width: 100%;
-    height: auto;
-}
-
-.featured {
-    height: auto;
-    border-radius: 2rem;
-}
-
-.featured-image {
-    border-radius: 2rem;
-}
-
-h1 {
-    color: #FFF;
-    font-family: "Instrument Serif";
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2.5rem; /* 125% */
-}
-
-h2 {
-    color: #FFF;
-    font-family: "Instrument Serif";
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 2rem; /* 133.333% */
-}
-
-p {
-    color: rgba(255, 255, 255, 0.40);
-    font-family: "Roboto Mono";
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1rem; /* 133.333% */
-    letter-spacing: 0.12rem;
-    text-transform: uppercase;
-}
-
-.search-container {
-    width: 100%;
-}
-
-.search-input {
-    width: 100%;
-    padding: 1.5rem 2.5rem;
-    border-radius: 1rem;
-    border: none;
-    font-size: 1rem;
-}
-
-footer {
-    padding: 1rem 0;
-}
-
-input::placeholder {
-    font-family: "Roboto Mono", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 400;
-    max-width: 800px;
-    text-transform: uppercase;
-    opacity: 0.64;
-    letter-spacing: 0.1rem;
-}
-
-.input-label {
-    position: relative;
-    width: 100%;
-    background-color: #FFF;
-}
-
-.input-icon {
-    position: absolute;
-    right: 40px;
-    top: 0;
-    bottom: 0;
-    vertical-align: middle;
-}
+    fetchExperiments();
+    // Function to display data with smooth transition
+    window.displayData = function(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section.classList.contains('active')) {
+            section.classList.remove('active');
+            setTimeout(() => {
+                section.style.display = 'none';
+            }, 500); // Match the transition duration
+        } else {
+            section.style.display = 'block';
+            setTimeout(() => {
+                section.classList.add('active');
+            }, 10); // Slight delay to trigger transition
+        }
+    };
+});
