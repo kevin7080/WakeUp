@@ -62,7 +62,7 @@ The project empowers users to make informed decisions, reduce their carbon footp
 - Use the AI chatbot to get further insights or answers to your climate-related questions.
 
 ## Team Members
-- **Leo:** Team lead, AI and Backend Specialist, responsible for developing predictive models and managing data processing systems.
+- **Leo:** Team leader, AI and Backend Specialist, responsible for developing predictive models and managing data processing systems.
 - **Linh:** Data Science Expert specializing in data visualization and frontend development, creating insightful visual narratives and user-friendly interfaces.
 - **James Chimdindu Ogbonna:** Creative UI/UX Designer, transforming complex ideas into intuitive user journeys.
 - **Kevin Junior Ojang Ojong:** Frontend Developer, responsible for integrating backend and leading presentations.
