@@ -1,5 +1,7 @@
 # ClimateAware
 
+**Team Website:** [Team WakeUp Website](https://github.com/NguyenHuy190303/NASA/blob/main/photo_2024-10-06_19-12-32.jpg)
+
 ## About the Project
 
 Climate Aware is a platform that aims to raise awareness about climate change by simplifying complex climate data into interactive and actionable narratives. The project is built by Team WakeUp, a dedicated group driven by the mission of awakening individuals to the urgent realities of Earth's climate crisis through technology and data. We transform critical climate insights from open-source data sources like NASA and the US Greenhouse Gas Center into engaging, easy-to-understand timelines.
