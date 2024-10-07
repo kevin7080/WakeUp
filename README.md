@@ -35,7 +35,15 @@ The project empowers users to make informed decisions, reduce their carbon footp
 - OpenAI API key (stored in a `.env` file)
 - Node.js (for JavaScript execution)
 
-### Installation
+## Installation
+###For normal user
+To install the application, click [here to download and run the setup script](https://github.com/NguyenHuy190303/WakeUp/raw/main/setup.bat).
+
+1. Click the link above to download the `setup.bat` file.
+2. Run the `setup.bat` file after downloading to install the application.
+
+**Note:** If you see a security warning, select "Run anyway" to proceed with the installation.
+###For dev user
 1. Clone the repository:
    ```sh
    git clone https://github.com/NguyenHuy190303/WakeUp.git
