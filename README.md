@@ -37,7 +37,7 @@ The project empowers users to make informed decisions, reduce their carbon footp
 
 ## Installation
 ###For normal user
-To install the application, click [here to download and run the setup script](https://github.com/NguyenHuy190303/WakeUp/raw/main/setup.bat).
+To install the application, click [here to download and run the setup script](https://github.com/NguyenHuy190303/WakeUp/blob/main/setup.bat).
 
 1. Click the link above to download the `setup.bat` file.
 2. Run the `setup.bat` file after downloading to install the application.
