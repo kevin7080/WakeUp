@@ -121,12 +121,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Send the message to the backend API
         try {
-            const response = await fetch('/api/gpt', {
+            const response = await fetch('/api/gpt', { // Ensure this endpoint matches your Flask backend
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message }),
+                body: JSON.stringify({ message: message }), // Payload structure matches backend expectations
             });
 
             if (response.ok) {
