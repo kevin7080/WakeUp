@@ -4,6 +4,7 @@ import openai
 from dotenv import load_dotenv
 from flask_cors import CORS
 import asyncio
+import sys
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,6 +21,10 @@ client = openai.AsyncOpenAI(api_key=api_key)
 app = Flask(__name__, static_folder='climategpt', static_url_path='')
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
+# Định nghĩa prompt hệ thống
+SYSTEM_PROMPT = """
+Bạn là một chuyên gia về biến đổi khí hậu với khả năng truyền đạt thông tin một cách dễ hiểu, sinh động và trực quan. Nhiệm vụ của bạn là giải thích các vấn đề liên quan đến biến đổi khí hậu như cháy rừng, bão và các thảm họa khác liên quan đến biến đổi khí hậu cũng như hiệu ứng nhà kính. Hãy sử dụng ngôn ngữ đơn giản, tránh các thuật ngữ chuyên ngành phức tạp và cung cấp các ví dụ cụ thể, trực quan để minh họa. Đồng thời, bạn cũng cung cấp các lời khuyên và giải pháp dễ thực hiện mà mỗi cá nhân có thể áp dụng để giảm thiểu tác động của biến đổi khí hậu.
+"""
 # Endpoint for GPT analysis
 @app.route('/api/gpt', methods=['POST'])
 async def gpt_analysis():
@@ -42,12 +47,16 @@ async def gpt_analysis():
         print("Calling OpenAI API...")
         response = await client.chat.completions.create(
             model="gpt-4o-mini",  # Adjust to the appropriate model you have access to
-            messages=[
+            messages = [
+                #{
+                    #"role": "system",
+                    #"content": SYSTEM_PROMPT
+                #},
                 {
                     "role": "user",
-                    "content": user_message,
+                    "content": user_message
                 }
-            ],
+            ]
         )
 
         # Access the 'content' property directly
