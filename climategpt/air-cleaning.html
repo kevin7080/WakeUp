@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Aware</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/icon.svg">
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="css/index.css">
+
+    <!-- Ensure scripts are loaded at the end of the body for better performance -->
+</head>
+<body>
+    <!-- Video Background Container -->
+    <div class="video-container">
+        <!-- Cycling through three videos -->
+        <video class="video-background active" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/4318100/4318100-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video class="video-background" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/28651202/12443641_2560_1440_24fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video class="video-background" autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/28769243/12472913_2560_1440_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Video Controls (e.g., indicators for active video) -->
+    <div class="video-controls">
+        <div class="video-dot active"></div>
+        <div class="video-dot"></div>
+        <div class="video-dot"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header-container">
+            <header>
+                <a class="logo" href="index.html">
+                    <img src="assets/images/icon.svg" alt="ClimateAware Logo">
+                    ClimateAware
+                </a>
+
+                <!-- Navigation Links -->
+                <a href="https://climate-story.streamlit.app/" class="explore-more-btn" target="_blank" rel="noopener noreferrer">Explore by Chart</a>
+                <a href="https://earth.gov/ghgcenter/exploration?search=&datasets=%5B%5D&taxonomy=%7B%7D&date=&dateRange=" class="explore-btn map-btn" target="_blank" rel="noopener noreferrer">Explore by Map</a>
+
+                <!-- Language Selector -->
+                <select class="language-selector" aria-label="Select Language">
+                    <option value="ENGLISH">EN</option>
+                    <option value="FINNISH">FI</option>
+                </select>
+            </header>
+
+            <!-- Footer with Location and Weather Info -->
+            <div class="footer">
+                <p id="location" class="location" aria-live="polite"></p>
+                <h2 id="weather" class="weather">Fetching weather data...</h2>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main>
+            <div class="content">
+                <div class="learn-more-container">
+                    <div class="cards">
+                        <div class="learn-more-heading">
+                            <h1>The Air is Getting Dirtier, But We Can Clean It</h1>
+                        </div>
+                    </div>
+
+                    <div class="featured">
+                        <img class="featured-image" src="https://images.pexels.com/photos/459728/pexels-photo-459728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Air Cleaning" loading="lazy">
+                    </div>
+
+                    <div class="image-cards">
+                        <img src="assets/images/air-cleaning1.png" alt="Air Cleaning Method 1" loading="lazy">
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>What’s happening?</p>
+                            <h2>Carbon dioxide (CO₂) levels are increasing in the atmosphere due to human activities such as transportation, industrial processes, and burning fossil fuels. This buildup is driving climate change, making the planet hotter and leading to more frequent natural disasters like wildfires.</h2>
+                        </div>
+                    </div>
+
+                    <div class="image-cards">
+                        <img src="assets/images/air-cleaning2.png" alt="Air Cleaning Method 2" loading="lazy">
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>How can we solve that as a group?</p>
+                            <h2>We can collectively reduce CO₂ emissions by transitioning to clean energy sources like wind and solar, switching to electric vehicles, and planting more trees to absorb CO₂. Governments and communities should promote policies that encourage green energy adoption.</h2>
+                        </div>
+                    </div>
+
+                    <div class="cards">
+                        <div class="learn-more">
+                            <p>How can I solve that as an individual?</p>
+                            <h2>You can contribute by driving less, using energy-efficient appliances, and planting trees in your communities or homes. Reducing personal energy consumption by turning off lights and unplugging devices also helps to lower CO₂ emissions.</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Container -->
+                <div class="search-container">
+                    <label class="input-label" for="searchInput">
+                        <input type="text" id="searchInput" class="search-input" placeholder="WHAT ARE YOU MOST INTERESTED IN?" aria-label="Search Interests">
+                        <!-- SVG Icon for Search -->
+                        <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="1.5rem" height="1.5rem" fill="#000000" viewBox="0 0 256 256" aria-hidden="true">
+                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,109.66-32,32a8,8,0,0,1-11.32-11.32L148.69,136H88a8,8,0,0,1,0-16h60.69l-18.35-18.34a8,8,0,0,1,11.32-11.32l32,32A8,8,0,0,1,173.66,133.66Z"></path>
+                        </svg>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Chat Icon -->
+            <div class="chat-icon" id="chatIcon" role="button" aria-label="Open Chat">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4EyzJvoJLgKEt_YCCds2jz60eZZW8fJKdA&s" alt="Chat Icon" width="40" height="40">
+            </div>
+
+            <!-- Chat Popup -->
+            <div class="chat-popup" id="chatPopup" role="dialog" aria-modal="true" aria-labelledby="chatHeader">
+                <!-- Chat Header -->
+                <div class="chat-header">
+                    <h2 id="chatHeader">Chat with us</h2>
+                    <button class="close-btn" id="closeBtn" aria-label="Close Chat">&times;</button>
+                </div>
+                
+                <!-- Chat Body -->
+                <div class="chat-body" id="chatBody" aria-live="polite">
+                    <!-- Initial message from bot -->
+                    <div class="bot-message">Hi! How can I help you today?</div>
+                </div>
+                
+                <!-- Chat Footer -->
+                <div class="chat-footer">
+                    <form id="chatForm" aria-label="Chat Form">
+                        <input type="text" id="chatInput" placeholder="Type your message here..." autocomplete="off" aria-label="Chat Input">
+                        <button type="submit" id="sendBtn" aria-label="Send Message">Send</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- External JavaScript Files -->
+    <script src="scripts/index.js" defer></script>
+    <script src="scripts/chat.js" defer></script>
+    <script src="scripts/location.js" defer></script>
+    <script src="scripts/test.js" defer></script>
+</body>
+</html>
